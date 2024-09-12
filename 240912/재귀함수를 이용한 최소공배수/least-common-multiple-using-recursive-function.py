@@ -17,8 +17,11 @@ n = int(input())
 num = list(map(int, input().split()))
 num.sort()
 
-lcm_1 = lcm(num[0], num[1])
-for i in num[2:]:
-    lcm_1 = lcm(lcm_1, i)
+if n == 1:
+    print(*num)
+else:
+    lcm_1 = lcm(num[0], num[1])
+    for i in num[2:]:
+        lcm_1 = lcm(lcm_1, i)
 
-print(lcm_1)
+    print(lcm_1)
