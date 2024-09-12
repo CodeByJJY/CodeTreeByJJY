@@ -10,8 +10,6 @@ def lcm(a, b):
         b = c
     return (org_a*org_b)//a
 
-
-
 n = int(input())
 
 num = list(map(int, input().split()))
