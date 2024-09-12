@@ -4,7 +4,7 @@
 def lcm(a, b):
     org_a, org_b = a, b
     c = a%b
-    while c != 0:
+    while b != 0:
         c = a%b
         a = b
         b = c
@@ -14,6 +14,7 @@ n = int(input())
 
 num = list(map(int, input().split()))
 num.sort()
+
 
 if n == 1:
     print(*num)
