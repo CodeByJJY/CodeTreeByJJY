@@ -1,6 +1,6 @@
 #                  1.  2.  3.  4.  5.  6.  7.  8.  9. 10. 11. 12.
 num_of_days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-day_of_week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+day_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 def cal_day(m, d):
     month, day = 1, 1
