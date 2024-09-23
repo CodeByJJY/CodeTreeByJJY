@@ -1,7 +1,7 @@
 #                  1.  2.  3.  4.  5.  6.  7.  8.  9. 10. 11. 12.
 num_of_days = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 #                 0.     1.     2.     3.     4.     5.     6.
-day_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+day_of_week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 def cal_day(m, d):
     month, day = 1, 1
@@ -24,10 +24,9 @@ def cal_day(m, d):
 m1, d1, m2, d2 = map(int, input().split())
 A = input()
 
-day_index = day_of_week.index(A)
-date_interval = cal_day(m2, d2) - cal_day(m1, d1) + 1
-day_count = date_interval // 7
-if date_interval%7 > day_index:
+day_interval = cal_day(m2, d2) - cal_day(m1, d1) + 1
+day_count = day_interval // 7
+if day_interval%7 >= day_of_week.index(A):
     day_count += 1
 
 print(day_count)
