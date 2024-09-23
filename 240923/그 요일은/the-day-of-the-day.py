@@ -25,10 +25,7 @@ A = input()
 
 day_index = day_of_week.index(A)
 date_interval = cal_day(m2, d2) - cal_day(m1, d1) + 1
+date_interval += day_index
 day_count = date_interval // 7
-
-
-if A == 'Mon':                      day_count += 1
-if date_interval%7 >= day_index:    day_count += 1
 
 print(day_count)
