@@ -24,7 +24,11 @@ m1, d1, m2, d2 = map(int, input().split())
 A = input()
 
 day_index = day_of_week.index(A)
-result = (cal_day(m2, d2) - cal_day(m1, d1)) // 7
-if (cal_day(m2, d2) - cal_day(m1, d1) + 1)%7 >= day_index:
-    result += 1
-print(result)
+date_interval = cal_day(m2, d2) - cal_day(m1, d1) + 1
+day_count = date_interval // 7
+
+
+# if A == 'Mon':                      day_count += 1
+if date_interval%7 >= day_index:    day_count += 1
+
+print(day_count)
