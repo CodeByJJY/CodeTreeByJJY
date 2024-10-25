@@ -13,7 +13,7 @@ for _ in range(n):
             street[i] += 1
         start -= scalar
     else:
-        for i in range(start, start + scalar):
+        for i in range(start, start + scalar + 1):
             street[i] += 1
         start += scalar
 
