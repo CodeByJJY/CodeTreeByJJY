@@ -5,10 +5,11 @@ start = 1000
 cnt = 0
 
 for _ in range(n):
-    instr = input()
+    instr = input().split()
     scalar = int(instr[0])
+    direction = instr[1]
 
-    if instr[2] == 'L':
+    if direction == 'L':
         for i in range(start - scalar, start):
             street[i] += 1
         start -= scalar
