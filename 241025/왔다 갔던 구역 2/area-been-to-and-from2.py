@@ -1,7 +1,7 @@
-street = [0 for _ in range(2000)]
+street = [0 for _ in range(1, 2001)]
 
 n = int(input())
-start = 999
+start = 1000
 cnt = 0
 
 for _ in range(n):
@@ -13,7 +13,7 @@ for _ in range(n):
             street[i] += 1
         start -= scalar
     else:
-        for i in range(start, start + scalar + 1):
+        for i in range(start, start + scalar):
             street[i] += 1
         start += scalar
 
