@@ -11,7 +11,7 @@ for _ in range(n):
     if instr[2] == 'L':
         for i in range(start - 1, start - scalar - 1, -1):
             street[i] += 1
-        start -= (scalar + 1)
+        start -= scalar
     else:
         for i in range(start, start + scalar):
             street[i] += 1
