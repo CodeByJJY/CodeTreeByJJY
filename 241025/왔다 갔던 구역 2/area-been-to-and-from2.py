@@ -9,7 +9,7 @@ for _ in range(n):
     scalar = int(instr[0])
 
     if instr[2] == 'L':
-        for i in range(start - 1, start - scalar - 1, -1):
+        for i in range(start - scalar, start):
             street[i] += 1
         start -= scalar
     else:
