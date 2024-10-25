@@ -1,4 +1,4 @@
-street = [0 for _ in range(1, 2001)]
+street = [0 for _ in range(2000)]
 
 n = int(input())
 start = 1000
