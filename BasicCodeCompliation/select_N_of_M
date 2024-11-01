@@ -1,0 +1,28 @@
+# n자리의 2진수 중 1의 개수가 m개인 수들만 출력하는 프로그램.
+
+n, m = 3, 2
+answer = []
+
+def print_answer():
+    for elem in answer:
+        print(elem, end = " ")
+    print()
+
+# 해당 시점에서 1의 개수 자체를 인수로 넘겨받는 함수
+def choose(curr_num, cnt):
+    if curr_num == n + 1:       # n자리의 2진수 중
+        if cnt == m:            # 1의 개수가 m개인 것들만
+            print_answer()      # 출력
+        return
+    
+    answer.append(0)
+    choose(curr_num + 1, cnt)       
+    answer.pop()
+
+    answer.append(1)
+    choose(curr_num + 1, cnt + 1)
+    answer.pop()
+
+    return
+
+choose(1, 0)
