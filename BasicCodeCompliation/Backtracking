@@ -3,7 +3,7 @@
 N = 3
 arr = []
 
-def choose(curr_num):
+def choose(curr_num):                # curr_num : 해당 시점에서 완성된 배열의 길이
     #   종료조건
     #   curr_num이 N+1인 경우
     if curr_num == N+1:
