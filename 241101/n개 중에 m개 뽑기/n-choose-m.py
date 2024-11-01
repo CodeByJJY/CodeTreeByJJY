@@ -4,16 +4,16 @@ N, M = map(int, input().split())
 
 answer = []
 
-def choose(curr_num, cnt):
+def choose(cnt):
     # 종료 조건
-    if curr_num == M + 1:
+    if len(answer) == M:
         print(*answer)
         return
     
     # 진입
     for i in range(cnt, N + 1):
         answer.append(i)
-        choose(curr_num + 1, answer[-1] + 1)
+        choose(answer[-1] + 1)
         answer.pop()
 
-choose(1, 1)
+choose(1)
