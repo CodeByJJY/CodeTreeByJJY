@@ -1,0 +1,20 @@
+# 인접 행렬
+D1 = [
+    [0 for _ in range(V + 1)]
+    for _ in range(V + 1)
+]
+
+# 인접 리스트
+D2 = [
+    []
+    for _ in range(V + 1)
+]
+
+
+for _ in range(E):
+    start, end, cost = map(int, input().split())
+    # 인접 행렬
+    D1[start][end] = cost       # cost : 가중치
+
+    # 인접 리스트
+    D2[start].append((end, cost))
