@@ -16,9 +16,13 @@ def choose(curr_num):
     # 2. 현재 숫자가 전, 전전 숫자와는 다를 경우
     # 결론 : 배열에 숫자 추가
     for i in range(1, K + 1):
-        if curr_num <= 2 or (answer[curr_num-2] == answer[curr_num-3] != i):
+        if curr_num <= 2:
             answer.append(i)
-            choose(curr_num + 1)
-            answer.pop()
+        elif i != answer[curr_num-2]:
+            answer.append(i)
+        elif answer[curr_num-2] == answer[curr_num-3]:
+            continue
+        else:
+            answer.append(i)
 
 choose(1)
