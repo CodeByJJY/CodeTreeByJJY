@@ -1,0 +1,26 @@
+n = 3
+answer = []
+
+def print_answer():
+    for elem in answer:
+        print(elem, end=" ")
+    print()
+
+def choose(curr_num):
+    if curr_num == n + 1:
+        print_answer()
+        return
+
+    #  특정 조건 : 0이 연속해서 나오면 안된다.
+    if curr_num == 1 or answer[-1] != 0:      
+        answer.append(0)
+        choose(curr_num + 1)
+        answer.pop()
+    
+    answer.append(1)
+    choose(curr_num + 1)
+    answer.pop()
+
+    return
+
+choose(1)
