@@ -5,7 +5,7 @@
 #    숫자 m 이상인 말은 몇개인가?
 
 n, m, k = map(int, input().split())
-score_board = [0] * (k + 1)  # 각자의 말의 점수를 표기
+score_board = [1] * (k + 1)  # 각자의 말의 점수를 표기
 score_list = []         # 각 경우의 수에서 획득한 점수를 모음.
 
 # n개의 숫자가 공백을 두고 주어짐
