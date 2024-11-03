@@ -6,3 +6,24 @@ def dfs(vertex):
             print(curr_v)
             visited[curr_v] = True    # 방문표시
             dfs(curr_v)
+
+
+
+#################################################################
+
+
+# 다음 주소가 격자 내부인지 탐색
+def in_range(x, y):
+    return 0 <= x and x < 5 and 0 <= y and y < 5
+
+# 다음 주소가 이동 가능한지 여부 판별
+def can_go(x, y):
+    # 1. 격자 내부인가?
+    if not in range(x, y):
+        return False
+    
+    # 2. 이미 방문했거나, 뱀이 있는 곳인가?
+    if visited[x][y] or grid[x][y] == 0:
+        return False
+    
+    return True
