@@ -1,19 +1,32 @@
+# 알고리즘 변경
+# dx, dy 테크닉에서 변화를 주어야 함
 from collections import deque
 
-# n행 m열
-n, m = map(int, input().split())
+q = deque()
 
-# 격자 입력 받기 (0: 뱀 있음, 1: 뱀 없음)
+# n행 m열
+n, m = tuple(map(int, input().split()))
+
+# visited 배열
+visited = [
+    [False for _ in range(m)]
+    for _ in range(n)
+]
+
+# 격자
 grid = []
 for _ in range(n):
-    grid.append(list(map(int, input().split())))
+    grid.append(tuple(map(int, input().split())))
 
-# 방문 여부를 기록할 배열
-visited = [[False for _ in range(m)] for _ in range(n)]
+# dx, dy
+#      상,하,좌,우
+dxs = [0, 0, -1, 1]
+dys = [-1, 1, 0, 0]
 
-# 방향 벡터 (상, 하, 좌, 우)
-dxs = [-1, 1, 0, 0]
-dys = [0, 0, -1, 1]
+# push 함수
+def push(x, y):
+    visited[x][y] = True
+    q.append((x, y))
 
 # 격자 내 여부 탐색
 def in_range(x, y):
@@ -29,16 +42,10 @@ def can_go(x, y):
 
 # BFS 탐색
 def bfs():
-    q = deque()
-    if grid[0][0] == 1:  # 시작점이 이동 가능하면 큐에 추가
-        q.append((0, 0))
-        visited[0][0] = True
-
     while q:
         x, y = q.popleft()
 
-        # 도착 지점에 도달하면 탈출 가능
-        if x == n - 1 and y == m - 1:
+        if x == m - 1 and y == n - 1:
             return True
 
         for dx, dy in zip(dxs, dys):
@@ -46,13 +53,14 @@ def bfs():
 
             if can_go(new_x, new_y):
                 visited[new_x][new_y] = True
-                q.append((new_x, new_y))
-
-    # 도착 지점에 도달하지 못하면 탈출 불가능
+                push(new_x, new_y)
     return False
+
+# 시작점 설정
+push(0, 0)
 
 # 탐색 후 결과 출력
 if bfs():
-    print(1)  # 탈출 가능한 경우
+    print(1)
 else:
-    print(0)  # 탈출 불가능한 경우
+    print(0)
