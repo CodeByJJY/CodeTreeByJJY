@@ -45,7 +45,7 @@ def bfs():
     while q:
         x, y = q.popleft()
 
-        if x == m - 1 and y == n - 1:
+        if x == n - 1 and y == m - 1:
             return True
 
         for dx, dy in zip(dxs, dys):
