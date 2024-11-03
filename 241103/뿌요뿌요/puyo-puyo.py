@@ -1,3 +1,5 @@
+# concept : 각 원소를 순회하면서 각 원소에 대한 dfs 탐색을 행한다.
+
 # 격자의 크기
 n = int(input())
 visited = [[False for _ in range(n)] for _ in range(n)]
