@@ -12,6 +12,7 @@ visited = [
     [False for _ in range(m)]
     for _ in range(n)
 ]
+visited[0][0] = True
 
 # 격자
 grid = []
