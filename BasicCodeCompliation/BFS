@@ -1,0 +1,113 @@
+##################### BFS 그래프 탐색 #####################
+# 그래프 탐색 알고리즘의 대원칙
+# 1) 시작점으로부터 연결된 모든 정점을 전부 방문해야 한다.
+# 2) 이미 방문한 정점은 다시는 방문하지 않는다.
+
+# BFS 구현 기본
+# 1) 재귀함수 사용 x.
+# 2) Queue 자료구조를 이용하여 작성함.
+# - 새로 방문하게 되는 노드를 queue에 계속 넣어준다.
+# - queue가 empty 상태가 되기 전까지,
+#   queue에서 가장앞에 있는 원소를 pop하여 해당 원소를 현재 원소의 위치로 설정.
+# - Queue에서 뽑힌 위치 curr_v가 현재 위치.
+# - graph[curr_v][next_v] = 1 : 현재 노드와 다음 노드가 연결되어 있다.
+# - visited[next_v] = 0 : 아직 방문하지 않았다.
+# - visited 배열 : (크기) = (정점의 개수), queue에 새로운 위치를 넣는 순간, 꼭 해당 위치의 ㅍvisited 값을 True로 변경해야 함.
+
+# Ex)
+from collection import deque
+
+VERTICES_NUM = 7
+EDGES_NUM = 6
+
+graph = [
+    [0 for _ in range(VERTICES_NUM + 1)]
+    for _ in range(VERTICES_NUM + 1)
+]
+visited = [False for _ in range(VERTICES_NUM + 1)]
+q = deque()
+
+def bfs():
+    while q:
+        curr_v = q.popleft()
+
+        for next_v in range(1, VERTICES_NUM + 1):
+            if graph[curr_v][next_v] and not visited[next_v]:
+                print(next_v)
+                visited[next_v] = True
+                q.append(next_v)
+
+start_points = [1, 1, 1, 2, 4, 6]
+end_points = [2, 3, 4, 5, 6, 7]
+
+for start, end in zip(start_points, end_points):
+    graph[start][end] = 1
+    graph[end][start] = 1
+
+root_vertex = 1
+print(root_vertex)
+visited[root_vertex] = True
+q.append(root_vertex)
+bfs()
+
+##################### BFS 그래프 탐색 #####################
+# 1. 2차원 격자 탐색 알고리즘의 대원칙
+# - 현재 위치 (x, y) 기준.
+# - (x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1) 중 한 곳으로 이동
+# - visited 배열 -> 2차원
+# - can_go 함수가 판단해야 하는 조건 3가지
+#   1) 격자 안에 있는가? -> in_range(x, y) 함수 만들기.
+#   2) 방문한 적이 없는가?
+#   3) 뱀이 없는가?
+
+# 2. push 함수 재정의
+# - 용도 : queue에 원소를 넣는 과정 진행.
+
+# 3. BFS in 격자
+# - queue가 empty 상태가 되기 전까지 탐색 반복.
+# - queue에서 가장 앞에 있는 원소를 현재 위치로 설정.
+#   이 때, 꼭 queue에서 해당 원소를 pop해주어야 함.
+# - dx, dy 테크닉.
+# - 인접한 위치로 이동해야 할 필요가 있다면,
+#   1) visited 값을 true로 설정해주고
+#   2) queue에 해당 위치를 넣어준다.
+
+
+# Ex)
+# 격자 내 범위인지 판정
+def in_range(x, y):
+    return 0 <= x < 5 and 0 <= y < 5
+
+# 해당 칸으로 이동 가능한지 판정
+def can_go(x, y):
+    if not in_range(x, y):
+        return False
+    if visited[x][y] or grid[x][y] == 0:
+        return False
+    return True
+
+# queue로 정점 밀어넣기
+def push(x, y):
+    global order
+
+    answer[x][y] = order
+    order += 1
+    visited[x][y] = True
+    q.apppend((x, y))
+
+# bfs 탐색
+def bfs():
+    dxs, dys = [1, 0], [0, 1]
+
+    while q:
+        x, y = q.popleft()
+
+        for dx, dy in zip(dxs, dys):
+            new_x, new_y = x + dx, y + dy
+
+            if can_go(new_x, new_y):
+                push(new_x, new_y)
+
+push(0, 0)
+bfs()
+
