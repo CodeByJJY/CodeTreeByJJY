@@ -111,3 +111,41 @@ def bfs():
 push(0, 0)
 bfs()
 
+
+
+##################### 최단경로 #####################
+from collections import deque
+
+X_LEN = 4
+Y_LEN = 3
+
+q = deque()
+step = [
+    [0 for _ in range(Y_LEN)]
+    for _ in range(X_LEN)
+]
+visited = [
+    [False for _ in range(Y_LEN)]
+    for _ in range(X_LEN)
+]
+
+def in_range(x, y):
+    return 0 <= x < X_LEN and 0 <= y < Y_LEN
+
+def push(x, y, s):
+    step[x][y] = s
+    visited[x][y] = True
+    q.append((x, y))
+
+def bfs():
+    x, y = q.popleft()
+
+    for dx, dy in zip(dxs, dys):
+        new_x, new_y = x + dx, y + dy
+
+        if in_range(new_x, new_y) and /
+            not visited[new_x][new_y]:
+            push(new_x, new_y, step[x][y] + 1)
+
+push(0, 0, 0)
+bfs()
