@@ -25,7 +25,7 @@ def initialize():
 initialize()
 
 for i in range(2, N):
-    for j in range(1, i):
+    for j in range(1, N):
         dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + grid[i][j]
 
 ans = INT_MIN
