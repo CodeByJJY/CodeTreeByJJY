@@ -1,0 +1,11 @@
+n = int(input())
+
+dp = [-1] * (n + 1)
+
+if n == 2 or n == 3:
+    print(1)
+else:
+    for i in range(4, n + 1):
+        dp[i] = dp[i - 2] + dp[i - 3]
+
+    print(dp[n])
