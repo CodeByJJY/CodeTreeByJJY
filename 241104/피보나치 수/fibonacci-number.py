@@ -1,6 +1,5 @@
 N = int(input())
 memo = [-1] * (N + 1)
-memo[1], memo[2] = 1, 1
 
 def fibbo(n):
     # 이미 n번째 값을 구한 적이 있다면, memo에 적힌 값 반환
