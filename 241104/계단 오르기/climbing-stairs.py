@@ -1,6 +1,6 @@
 n = int(input())
 
-dp = [-1] * (n + 1)
+dp = [0] * (n + 1)
 
 if n == 2 or n == 3:
     print(1)
