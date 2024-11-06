@@ -23,7 +23,7 @@ def in_range(x, y):
 def can_go(x, y):
     if not in_range(x, y):
         return False
-    if visited[x][y]:
+    if visited[x][y] or grid[x][y] == 0:
         return False
     return True
 
