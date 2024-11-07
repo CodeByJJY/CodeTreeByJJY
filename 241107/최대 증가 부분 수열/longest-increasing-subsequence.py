@@ -1,29 +1,28 @@
+# 1. 수열의 원소들 중 임의로 몇 개를 고른다.
+# 2. 순서대로 나열한다.
+# 3. 원소들이 계속 증가한다면, "증가 부분 수열"
 import sys
-
 INT_MIN = -sys.maxsize
 
-n = 5
-dp = [0]*n              # 점프 횟수 기록
-a = [2, 3, 0, 1, 4]     # 판
+# N 입력
+N = int(input())
 
+# DP 및 수열 배열 선언
+dp = [0] * N
+arr = list(map(int, input().split()))
+
+# DP 배열 초기화
 def initialize():
-    for i in range(n):
+    for i in range(N):
         dp[i] = INT_MIN
-    
-    dp[0] = 0
+    dp[0] = 1
 
 initialize()
 
-for i in range(1, n):
+# 메인 알고리즘
+for i in range(1, N):
     for j in range(0, i):
-        if dp[j] == INT_MIN:
-            continue
+        if arr[i] >= arr[j] and dp[i] < 1 + dp[j]:
+            dp[i] = 1 + dp[j]
 
-        if j + a[j] >= i:
-            dp[i] = max(dp[i], dp[j] + 1)
-
-ans = 0
-for i in range(n):
-    ans = max(ans, dp[i])
-
-print(ans)
+print(max(dp))
