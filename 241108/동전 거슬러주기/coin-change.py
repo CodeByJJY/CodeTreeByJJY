@@ -3,7 +3,7 @@
 n, m = map(int, input().split())
 coin = list(map(int, input().split()))
 dp = [-1] * (m + 1)
-dp[0] = 0
+dp[0] = 0       # 초기화 중요
 
 
 for i in range(1, m + 1):
