@@ -1,24 +1,43 @@
-def count_expressions(N, M, numbers):
-    # DP 테이블 초기화: -20에서 20까지의 값의 경우만 저장 가능
-    dp = [[0] * 41 for _ in range(N)]
-    dp[0][numbers[0] + 20] = 1  # 첫 번째 숫자를 더한 결과를 초기화
+MIN_M = 0
+MAX_M = 40
 
-    # DP 테이블 업데이트
-    for i in range(1, N):
-        for j in range(-20, 21):
-            if dp[i - 1][j + 20] > 0:
-                # 현재 숫자를 더하거나 빼는 경우
-                if -20 <= j + numbers[i] <= 20:
-                    dp[i][j + numbers[i] + 20] += dp[i - 1][j + 20]
-                if -20 <= j - numbers[i] <= 20:
-                    dp[i][j - numbers[i] + 20] += dp[i - 1][j + 20]
+OFFSET = 20
 
-    # 결과 출력
-    return dp[N - 1][M + 20]
+# 변수 선언 및 입력
+n, m = tuple(map(int, input().split()))
+a = [
+    0
+    for _ in range(n + 1)
+]
 
-# 입력 예제
-N, M = map(int, input().split())
-numbers = list(map(int, input().split()))
+# dp[i][j] :
+# i번째 숫자까지 고려해봤을 때
+# 계산 결과가 j가 나오는
+# 서로 다른 가짓수
+dp = [
+    [0 for _ in range(MIN_M, MAX_M + 1)]
+    for _ in range(n + 1)
+]
 
-# 결과 출력
-print(count_expressions(N, M, numbers))
+
+def initialize():
+    for i in range(n + 1):
+        for j in range(MIN_M, MAX_M + 1):
+            dp[i][j] = 0
+    dp[0][0 + OFFSET] = 1
+
+m += OFFSET
+
+given_seq = list(map(int, input().split()))
+a[1:] = given_seq[:]
+
+initialize()
+
+for i in range(1, n + 1):
+    for j in range(MIN_M, MAX_M + 1):
+        if j + a[i] <= MAX_M:
+            dp[i][j] += dp[i - 1][j + a[i]]
+        if j - a[i] >= MIN_M:
+            dp[i][j] += dp[i - 1][j - a[i]]
+
+print(dp[n][m])
