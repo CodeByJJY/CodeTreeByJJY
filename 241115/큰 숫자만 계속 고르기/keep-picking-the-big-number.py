@@ -1,19 +1,19 @@
-import heapq, sys
+import heapq
+import sys
 
-# 입력 받기
+# 입력 처리
 n, m = map(int, sys.stdin.readline().split())
 nums = list(map(int, sys.stdin.readline().split()))
 
-# 최대 힙으로 변환하기 위해 부호 반전
-pq = []
-for elem in nums:
-    heapq.heappush(pq, -elem)
+# 최대 힙 생성
+max_heap = []
+for num in nums:
+    heapq.heappush(max_heap, -num)  # 부호 반전하여 최대 힙처럼 사용
 
-# m번 연산 수행
+# m번 작업 수행
 for _ in range(m):
-    # 최대값 꺼내고 감소시킨 뒤 다시 삽입
-    max_val = -heapq.heappop(pq)  # 부호 반전으로 최댓값 가져오기
-    heapq.heappush(pq, -(max_val - 1))
+    largest = -heapq.heappop(max_heap)  # 최댓값 가져오기 (부호 복원)
+    heapq.heappush(max_heap, -(largest - 1))  # 감소 후 다시 삽입
 
 # 최댓값 출력
-print(-pq[0])  # 부호 반전으로 원래 값 출력
+print(-max_heap[0])  # 힙의 최댓값 (부호 복원)
