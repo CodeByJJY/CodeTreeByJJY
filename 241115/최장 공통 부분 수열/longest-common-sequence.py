@@ -1,29 +1,58 @@
-A = input().strip()
-B = input().strip()
-len_A, len_B = len(A), len(B)
+A = input()
+B = input()
+A_len, B_len = len(A), len(B)
 
-# DP 테이블 초기화
+# string의 index가 0부터 시작하기 때문에
+# 이를 1부터 시작하기 위해서 앞에 #을 추가해줍니다.
+A, B = '#' + A, '#' + B
+
 dp = [
-    [0 for _ in range(len_B + 1)]
-    for _ in range(len_A + 1)
+    [0 for _ in range(B_len + 1)]
+    for _ in range(A_len + 1)
 ]
 
-# LCS 계산
-for i in range(1, len_A + 1):
-    for j in range(1, len_B + 1):
-        if A[i - 1] == B[j - 1]:  # 문자가 같다면 이전 값에 1을 더함
-            dp[i][j] = dp[i - 1][j - 1] + 1
-        else:  # 문자가 다르면 이전 값 중 최댓값을 가져옴
-            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+def initialize():
+    # dp[1][1] 값은 첫 번째 문자열의 첫 번째 문자와
+    # 두 번째 문자열의 첫 번째 문자가 같은지 여부를 저장합니다.
+    dp[1][1] = int(A[1] == B[1])
+    
+    # 두 번째 문자열의 1번 인덱스의 문자까지만 사용했을 때 
+    # 가능한 부분 수열의 최대 길이를 채워넣어줍니다.
+    for i in range(2, A_len + 1):
+        if A[i] == B[1]:
+            dp[i][1] = 1
+        else:
+            dp[i][1] = dp[i-1][1]
+    
+    # 첫 번째 문자열의 1번 인덱스의 문자까지만 사용했을 때 
+    # 가능한 부분 수열의 최대 길이를 채워넣어줍니다.
+    for j in range(2, B_len + 1):
+        if A[1] == B[j]:
+            dp[1][j] = 1
+        else:
+            dp[1][j] = dp[1][j-1]
+            
+initialize()
 
-# LCS 길이
-lcs_length = dp[len_A][len_B]
-
-# 최소 삭제 횟수 계산
-result = (len_A - lcs_length) + (len_B - lcs_length)
-
-# 문제의 조건을 반영: 동일한 문자열이라도 최소 1번 삭제해야 한다면
-if result == 0:
-    result = 1
-
-print(result)
+for i in range(2, A_len + 1):
+    # 첫 번째 문자열의 i 번째까지 문자열을 고려했고
+    # 두 번째 문자열의 j 번째까지 문자열을 고려했을 때
+    # 가능한 부분 수열의 최대 길이를 구해줍니다.
+    for j in range(2, B_len + 1):
+        # Case 1:
+        # 첫 번째 문자열의 i번째 문자와,  두 번째 문자열 j번째 문자가 일치하는 경우
+        # 첫 번째 문자열에서 i-1번째 문자까지 고려하고, 
+        # 두 번째 문자열의 j-1번째 문자까지 고려했을 때 
+        # 가능한 공통 부분 수열의 뒤에 문자 하나를 새로 추가할 수 있게 됩니다. 
+        # 따라서 dp[i-1][j-1]에 1을 추가해주면 됩니다
+        if A[i] == B[j]:
+            dp[i][j] = dp[i-1][j-1] + 1
+            
+        # Case 2:
+        # 첫 번째 문자열의 i 번째 문자를 공통 부분 수열을 만드는데 고려하지 않는 경우와
+        # 두 번째 문자열의 j 번째 문자를 공통 부분 수열을 만드는데 고려하지 않는 경우 중
+        # 더 큰 값을 선택하여 줍니다. 
+        else:
+            dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+            
+print(dp[A_len][B_len])
