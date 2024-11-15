@@ -15,11 +15,11 @@ def max_treasure(n, treasure_info):
     
     # n층에서의 결과 계산 (1층의 방과 같은 경우를 제외)
     result = 0
-    for j in range(3):
-        for k in range(3):
-            if j != k:  # 1층의 선택과 n층의 선택이 같지 않은 경우
-                result = max(result, dp[-1][k])
-    
+    for first_choice in range(3):  # 1층에서의 선택
+        for last_choice in range(3):  # n층에서의 선택
+            if first_choice != last_choice:  # 1층과 n층의 선택이 다를 때만 고려
+                result = max(result, dp[-1][last_choice])
+
     return result
 
 # 입력 처리
