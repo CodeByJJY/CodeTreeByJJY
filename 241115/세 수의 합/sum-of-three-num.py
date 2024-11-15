@@ -1,11 +1,19 @@
-from itertools import combinations
-
 def count_triplets_with_sum(n, k, numbers):
     count = 0
-    # 세 개의 서로 다른 위치를 선택하여 조합을 생성
-    for comb in combinations(range(n), 3):
-        if numbers[comb[0]] + numbers[comb[1]] + numbers[comb[2]] == k:
-            count += 1
+    # 딕셔너리를 사용하여 두 수의 합을 저장
+    for i in range(n):
+        seen = {}
+        target = k - numbers[i]
+        for j in range(i + 1, n):
+            complement = target - numbers[j]
+            # 이전에 complement가 나온 적이 있는지 확인
+            if complement in seen:
+                count += seen[complement]
+            # 현재 숫자를 seen에 추가
+            if numbers[j] in seen:
+                seen[numbers[j]] += 1
+            else:
+                seen[numbers[j]] = 1
     return count
 
 # 입력 처리
