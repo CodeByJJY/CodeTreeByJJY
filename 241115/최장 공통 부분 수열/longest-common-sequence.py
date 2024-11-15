@@ -19,6 +19,10 @@ for i in range(1, len_A + 1):
 # LCS 길이
 lcs_length = dp[len_A][len_B]
 
-# 최소 삭제 횟수 계산
-result = (len_A - lcs_length) + (len_B - lcs_length)
-print(result)
+# 공통 부분이 없는 경우 정답은 0
+if lcs_length == 0:
+    print(0)
+else:
+    # 최소 삭제 횟수 계산
+    result = (len_A - lcs_length) + (len_B - lcs_length)
+    print(result)
