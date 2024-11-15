@@ -13,14 +13,14 @@ def max_treasure(n, treasure_info):
         dp[i][1] = treasure_info[i][1] + max(dp[i-1][0], dp[i-1][2])
         dp[i][2] = treasure_info[i][2] + max(dp[i-1][0], dp[i-1][1])
     
-    # n층에서의 결과 계산 (1층의 방과 같은 경우를 제외)
-    result = 0
-    for first_choice in range(3):  # 1층에서의 선택
-        for last_choice in range(3):  # n층에서의 선택
+    # 1층에서 선택한 방에 따른 마지막 층에서의 결과 계산
+    max_treasure_amount = 0
+    for first_choice in range(3):  # 1층의 방 선택
+        for last_choice in range(3):  # n층의 방 선택
             if first_choice != last_choice:  # 1층과 n층의 선택이 다를 때만 고려
-                result = max(result, dp[-1][last_choice])
+                max_treasure_amount = max(max_treasure_amount, dp[-1][last_choice])
 
-    return result
+    return max_treasure_amount
 
 # 입력 처리
 n = int(input().strip())
