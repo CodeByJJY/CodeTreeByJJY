@@ -20,4 +20,7 @@ while r < len(s1):
     else:
         r += 1  # 오른쪽 포인터 이동
 
-print(min_diff)
+if min_diff == 'inf':
+    print(-1)
+else:
+    print(min_diff)
